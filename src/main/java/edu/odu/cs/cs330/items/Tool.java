@@ -1,5 +1,6 @@
 package edu.odu.cs.cs330.items;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -47,9 +48,12 @@ public class Tool extends Equippable {
         super();
 
         this.setName(src.name);
-
-        // Complete this function
-
+        this.durability = src.durability;
+        this.speed = src.speed;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modifierLevel = src.modifierLevel;
+        this.element = src.element;
     }
 
     /**
@@ -86,8 +90,10 @@ public class Tool extends Equippable {
     {
         super.name    = snr.next();
         material      = snr.next();
-
-        // Complete this function
+        durability     = snr.nextInt();
+        speed          = snr.nextInt();
+        modifier       = snr.next();
+        modifierLevel  = snr.nextInt();
     }
 
     /**
@@ -96,12 +102,7 @@ public class Tool extends Equippable {
     @Override
     public Item clone()
     {
-        Tool cpy = new Tool();
-
-        cpy.setName(this.name);
-
-        // Complete this function
-
+        Tool cpy = new Tool(this);
         return cpy;
     }
 
@@ -119,8 +120,10 @@ public class Tool extends Equippable {
 
         Tool rhsItem = (Tool) rhs;
 
-        // Complete this function
-        return false;
+            
+        return this.name.equals(rhsItem.name) &&
+               this.material.equals(rhsItem.material) &&
+               this.modifier.equals(rhsItem.modifier);
     }
 
     /**
@@ -130,8 +133,7 @@ public class Tool extends Equippable {
     @Override
     public int hashCode()
     {
-        // Complete this function
-        return -1;
+        return Objects.hash(this.name, this.material, this.modifier);
     }
 
     /**
